@@ -1,0 +1,70 @@
+html {
+  font-size: 62.5%;
+}
+
+.maincard {
+  justify-content: center;
+  /* align-items: center; */
+  height: 70vh;
+  width: 60vh;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin: auto;
+  border-radius: 6px;
+}
+
+#input-box {
+  margin: 1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  width: 20rem;
+  height: 2.2rem;
+}
+
+.button {
+  border-radius: 6px;
+  height: 3.4rem;
+  padding: 0.4rem 1rem;
+}
+
+li {
+  list-style: none;
+}
+
+#list {
+  width: 100%;
+  justify-content: start;
+  font-size: 1.7rem;
+  /* align-items: center; */
+  display: grid;
+  grid-template-columns: 75% auto; /* for 2 column */
+  /* grid-template-rows: 3.2rem; */
+  /* grid-gap: 20rem; */
+  margin: 0.5rem 0px;
+  padding: 0.7rem 0px;
+}
+
+.head {
+  font-size: 4rem;
+  line-height: 1.1;
+  color: #646cff;
+}
+
+.deleteBox {
+  padding: 0.4rem 0.8rem;
+  margin: 0.8rem 0.4rem 0.8rem 1rem;
+  border: 1px solid black;
+}
+
+.editBox {
+  padding: 0.4rem 0.8rem;
+  margin: 0.8rem 0.4rem 0.8rem 0.4rem;
+  border: 1px solid black;
+}
+
+.checked-item {
+  text-decoration: line-through;
+}
+
+.not-checked-item {
+  /* padding: auto; */
+}
