@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "./modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import deleteIcon from "./assets/bin.png";
-import editIcon from "./assets/edit.png";
+import deleteIcon from "../assets/bin.png";
+import editIcon from "../assets/edit.png";
 
 interface TodoProps {
   readonly id: number;
@@ -17,6 +17,19 @@ function HomeScreen() {
   const [isOpen, setIsOpen] = useState(false);
   const [openItemId, setOpenItemId] = useState(0);
   const [editItem, setEditItem] = useState({});
+
+  const getUniqueId = (): number => {
+    let random = Math.floor(Math.random() * 9000 + 1000);
+    return random;
+  };
+
+  //   function getDarkColor() {
+  //     var color = '#';
+  //     for (var i = 0; i < 6; i++) {
+  //         color += Math.floor(Math.random() * 10);
+  //     }
+  //     return color;
+  // }
 
   const handleKeyPress = (e: any): void => {
     if (e.key === "Enter") {
@@ -35,19 +48,6 @@ function HomeScreen() {
     setValue(e.target.value);
   };
 
-  const getUniqueId = (): number => {
-    let random = Math.floor(Math.random() * 9000 + 1000);
-    return random;
-  };
-
-  //   function getDarkColor() {
-  //     var color = '#';
-  //     for (var i = 0; i < 6; i++) {
-  //         color += Math.floor(Math.random() * 10);
-  //     }
-  //     return color;
-  // }
-
   const handleCheck = (e: any, id: number): void => {
     // console.log(e.target.checked);
     let modifiedArr = todoArr.map((obj) => {
@@ -58,13 +58,12 @@ function HomeScreen() {
     setTodoArr(modifiedArr);
   };
 
-  const isChecked = (isComplete: boolean) => {
+  const isChecked = (isComplete: boolean): string => {
     return isComplete ? "checked-item" : "not-checked-item";
   };
 
   const addItemHandler = (): void => {
     if (value === "") {
-      console.log(value);
       alert("Please write something.");
       return;
     }
@@ -114,6 +113,19 @@ function HomeScreen() {
     // console.log(todoArr);
     // };
   }, [todoArr]);
+
+  // const [todos, setTodos] = useState(() => {
+  //   const savedTodos = localStorage.getItem("todos");
+  //   if (savedTodos) {
+  //     return JSON.parse(savedTodos);
+  //   } else {
+  //     return [];
+  //   }
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   return (
     <>

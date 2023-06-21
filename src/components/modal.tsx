@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./styles/modal.css";
+import "../styles/modal.css";
 
 interface Props {
   setIsOpen: any;
@@ -47,7 +47,16 @@ const Modal: React.FC<Props> = (props) => {
             value="save"
             onClick={() => editItemHandler(id, editItem.text)}
           >
-            Save changes
+            Save
+          </button>
+
+          <button
+            type="button"
+            className="button cancelbtn"
+            value="save"
+            onClick={() => setIsOpen(false)}
+          >
+            Cancel
           </button>
         </div>
       </div>
