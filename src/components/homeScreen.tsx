@@ -12,8 +12,14 @@ interface TodoProps {
 }
 
 function HomeScreen() {
+  // Get todos from LocalStorage if available otherwise return []empty
+  // const [todoArr, setTodoArr] = useState<TodoProps[]>([]); // array of objects before LocalStorage implementation
+  const [todoArr, setTodoArr] = useState<TodoProps[]>(() => {
+    const savedTodoArr = localStorage.getItem("todoArr");
+    if (savedTodoArr) return JSON.parse(savedTodoArr);
+    else return [];
+  });
   const [value, setValue] = useState<string>("");
-  const [todoArr, setTodoArr] = useState<TodoProps[]>([]); // array of objects
   const [isOpen, setIsOpen] = useState(false);
   const [openItemId, setOpenItemId] = useState(0);
   const [editItem, setEditItem] = useState({});
@@ -22,14 +28,6 @@ function HomeScreen() {
     let random = Math.floor(Math.random() * 9000 + 1000);
     return random;
   };
-
-  //   function getDarkColor() {
-  //     var color = '#';
-  //     for (var i = 0; i < 6; i++) {
-  //         color += Math.floor(Math.random() * 10);
-  //     }
-  //     return color;
-  // }
 
   const handleKeyPress = (e: any): void => {
     if (e.key === "Enter") {
@@ -108,29 +106,13 @@ function HomeScreen() {
 
   useEffect(() => {
     console.log(todoArr);
-
-    // return () => {
-    // console.log(todoArr);
-    // };
+    localStorage.setItem("todoArr", JSON.stringify(todoArr));
   }, [todoArr]);
-
-  // const [todos, setTodos] = useState(() => {
-  //   const savedTodos = localStorage.getItem("todos");
-  //   if (savedTodos) {
-  //     return JSON.parse(savedTodos);
-  //   } else {
-  //     return [];
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // }, [todos]);
 
   return (
     <>
       <div className="maincard">
-        <section>
+        <section style={{ textAlign: "center" }}>
           <input
             name="todo"
             value={value}
@@ -140,6 +122,25 @@ function HomeScreen() {
             onChange={getInput}
             id="input-box"
           />
+
+          <button
+            type="button"
+            className="button"
+            value="add priority"
+            onClick={() => setIsOpen(true)}
+          >
+            <FontAwesomeIcon icon={faPlus} /> Add Levels
+          </button>
+
+          {isOpen && (
+            <Modal
+              setIsOpen={setIsOpen}
+              editItemHandler={editItemHandler}
+              // id={obj.id}
+              setEditItem={setEditItem}
+              editItem={editItem}
+            />
+          )}
 
           <button
             type="button"
@@ -177,6 +178,8 @@ function HomeScreen() {
                           {obj.text}
                         </span>
                       </div>
+
+                      <div>High </div>
 
                       <div>
                         <span className="editBox" onClick={onClickEditHandler}>

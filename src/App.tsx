@@ -1,11 +1,13 @@
 import HomeScreen from "./components/homeScreen.tsx";
 import "./styles/index.css";
-import "./App.css";
+import todoIcon from "./assets/todo-list.png";
 
 function App() {
   return (
     <>
-      <h1 className="head"> What's your plan for Today ?</h1>
+      <h1 className="head">
+        Task Tracker <img src={todoIcon} alt="X" style={{ height: "3.8rem" }} />
+      </h1>
       <HomeScreen />
     </>
   );

@@ -10,7 +10,8 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = (props) => {
-  var { setIsOpen, editItemHandler, id, setEditItem, editItem } = props;
+  var { setIsOpen, editItemHandler, id, setEditItem, editItem, ...rest } =
+    props;
 
   const onChangeEditItemHandler = (e: any) => {
     setEditItem({ ...editItem, text: e.target.value });
@@ -41,23 +42,25 @@ const Modal: React.FC<Props> = (props) => {
             />
           </div>
 
-          <button
-            type="button"
-            className="button savebtn"
-            value="save"
-            onClick={() => editItemHandler(id, editItem.text)}
-          >
-            Save
-          </button>
+          <div id="buttonFlex">
+            <button
+              type="button"
+              className="button cancelBtn"
+              value="cancel"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </button>
 
-          <button
-            type="button"
-            className="button cancelbtn"
-            value="save"
-            onClick={() => setIsOpen(false)}
-          >
-            Cancel
-          </button>
+            <button
+              type="button"
+              className="button saveBtn"
+              value="save"
+              onClick={() => editItemHandler(id, editItem.text)}
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </>
