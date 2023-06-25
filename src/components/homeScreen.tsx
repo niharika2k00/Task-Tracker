@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EditModal from "./editModal";
-import LevelSelectionModal from "./levelSelectionModal";
+import Modal from "./modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import deleteIcon from "../assets/bin.png";
@@ -26,7 +25,12 @@ function HomeScreen() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenLabel, setIsOpenLabel] = useState<boolean>(false);
   const [openItemId, setOpenItemId] = useState<number>(0);
-  const [editItem, setEditItem] = useState({});
+  const [editItem, setEditItem] = useState<TodoProps>({
+    id: 1,
+    text: "",
+    label: "",
+    isComplete: false,
+  }); // edit item object
 
   const getUniqueId = (): number => {
     let random = Math.floor(Math.random() * 9000 + 1000);
@@ -85,16 +89,6 @@ function HomeScreen() {
     setIsOpenLabel(false);
   };
 
-  // If return arr of obj --> TodoProps[]
-  const deleteItemHandler = (id: number): void => {
-    let modifiedArr = todoArr.filter((obj) => {
-      return obj.id !== id;
-    });
-
-    setTodoArr(modifiedArr);
-    console.log("modifiedArr : ", modifiedArr);
-  };
-
   const editItemHandler = (id: number, updatedText: string): void => {
     console.log(
       "Id = ",
@@ -109,7 +103,18 @@ function HomeScreen() {
       if (obj.id === id) obj.text = updatedText;
     });
 
+    setTodoArr([...todoArr]);
     setIsOpen(false);
+  };
+
+  // If return arr of obj --> TodoProps[]
+  const deleteItemHandler = (id: number): void => {
+    let modifiedArr = todoArr.filter((obj) => {
+      return obj.id !== id;
+    });
+
+    setTodoArr(modifiedArr);
+    console.log("modifiedArr : ", modifiedArr);
   };
 
   const customElipsis = (input: string): string => {
@@ -125,19 +130,10 @@ function HomeScreen() {
     <>
       <div className="maincard">
         <section style={{ textAlign: "center", paddingTop: "1.6rem" }}>
-          {/* <input
-            name="todo"
-            value={value}
-            type="text"
-            placeholder="write your plans..."
-            onKeyPress={handleKeyPress}
-            onChange={getInput}
-            id="input-box"
-          /> */}
-
           {isOpenLabel && (
-            <LevelSelectionModal
-              setIsOpenLabel={setIsOpenLabel}
+            <Modal
+              type="create"
+              closeHandler={setIsOpenLabel}
               addItemHandler={addItemHandler}
               handleKeyPress={handleKeyPress}
               getInput={getInput}
@@ -165,15 +161,6 @@ function HomeScreen() {
               Clear All
             </button>
           )}
-
-          {/* <button
-            type="button"
-            className="button"
-            value="add todo"
-            onClick={addItemHandler}
-          >
-            <FontAwesomeIcon icon={faPlus} /> Todo
-          </button> */}
         </section>
 
         <section>
@@ -219,9 +206,10 @@ function HomeScreen() {
                         </span>
 
                         {isOpen && openItemId === obj.id && (
-                          <EditModal
+                          <Modal
+                            type="edit"
                             key={idx}
-                            setIsOpen={setIsOpen}
+                            closeHandler={setIsOpen}
                             editItemHandler={editItemHandler}
                             id={obj.id}
                             setEditItem={setEditItem}
