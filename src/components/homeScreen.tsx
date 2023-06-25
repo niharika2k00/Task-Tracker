@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./modal";
+import EditModal from "./editModal";
+import LevelSelectionModal from "./levelSelectionModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import deleteIcon from "../assets/bin.png";
@@ -8,6 +9,7 @@ import editIcon from "../assets/edit.png";
 interface TodoProps {
   readonly id: number;
   text: string;
+  label: string;
   isComplete: boolean;
 }
 
@@ -20,8 +22,10 @@ function HomeScreen() {
     else return [];
   });
   const [value, setValue] = useState<string>("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [openItemId, setOpenItemId] = useState(0);
+  const [labelVal, setLabelVal] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpenLabel, setIsOpenLabel] = useState<boolean>(false);
+  const [openItemId, setOpenItemId] = useState<number>(0);
   const [editItem, setEditItem] = useState({});
 
   const getUniqueId = (): number => {
@@ -56,8 +60,10 @@ function HomeScreen() {
     setTodoArr(modifiedArr);
   };
 
-  const isChecked = (isComplete: boolean): string => {
-    return isComplete ? "checked-item" : "not-checked-item";
+  const labelColor = (label: string): string => {
+    if (label.startsWith("Low")) return "labelBox low";
+    else if (label.startsWith("Medium")) return "labelBox medium";
+    else return "labelBox high";
   };
 
   const addItemHandler = (): void => {
@@ -70,11 +76,13 @@ function HomeScreen() {
     let todoObj: TodoProps = {
       id: getUniqueId(),
       text: value,
+      label: labelVal === "" ? "Medium Priority" : labelVal,
       isComplete: false,
     };
 
     setTodoArr([...todoArr, todoObj]);
     setValue("");
+    setIsOpenLabel(false);
   };
 
   // If return arr of obj --> TodoProps[]
@@ -104,6 +112,10 @@ function HomeScreen() {
     setIsOpen(false);
   };
 
+  const customElipsis = (input: string): string => {
+    return input.length > 112 ? `${input.substring(0, 112)}...` : input;
+  };
+
   useEffect(() => {
     console.log(todoArr);
     localStorage.setItem("todoArr", JSON.stringify(todoArr));
@@ -112,8 +124,8 @@ function HomeScreen() {
   return (
     <>
       <div className="maincard">
-        <section style={{ textAlign: "center" }}>
-          <input
+        <section style={{ textAlign: "center", paddingTop: "1.6rem" }}>
+          {/* <input
             name="todo"
             value={value}
             type="text"
@@ -121,35 +133,47 @@ function HomeScreen() {
             onKeyPress={handleKeyPress}
             onChange={getInput}
             id="input-box"
-          />
+          /> */}
 
-          <button
-            type="button"
-            className="button"
-            value="add priority"
-            onClick={() => setIsOpen(true)}
-          >
-            <FontAwesomeIcon icon={faPlus} /> Add Levels
-          </button>
-
-          {isOpen && (
-            <Modal
-              setIsOpen={setIsOpen}
-              editItemHandler={editItemHandler}
-              // id={obj.id}
-              setEditItem={setEditItem}
-              editItem={editItem}
+          {isOpenLabel && (
+            <LevelSelectionModal
+              setIsOpenLabel={setIsOpenLabel}
+              addItemHandler={addItemHandler}
+              handleKeyPress={handleKeyPress}
+              getInput={getInput}
+              value={value}
+              setLabelVal={setLabelVal}
             />
           )}
 
           <button
             type="button"
             className="button"
+            value="add priority"
+            onClick={() => setIsOpenLabel(true)}
+          >
+            <FontAwesomeIcon icon={faPlus} /> Add Task
+          </button>
+
+          {todoArr.length > 0 && (
+            <button
+              type="button"
+              className="button"
+              value="delete all"
+              onClick={() => setTodoArr([])}
+            >
+              Clear All
+            </button>
+          )}
+
+          {/* <button
+            type="button"
+            className="button"
             value="add todo"
             onClick={addItemHandler}
           >
             <FontAwesomeIcon icon={faPlus} /> Todo
-          </button>
+          </button> */}
         </section>
 
         <section>
@@ -174,14 +198,18 @@ function HomeScreen() {
                           onChange={(e) => handleCheck(e, obj.id)}
                           style={{ marginRight: "1rem" }}
                         />
-                        <span className={isChecked(obj.isComplete)}>
-                          {obj.text}
+                        <span
+                          className={
+                            obj.isComplete ? "checked-item" : "not-checked-item"
+                          }
+                        >
+                          {customElipsis(obj.text)}
                         </span>
                       </div>
 
-                      <div>High </div>
+                      <div className={labelColor(obj.label)}> {obj.label} </div>
 
-                      <div>
+                      <div style={{ textAlign: "center" }}>
                         <span className="editBox" onClick={onClickEditHandler}>
                           <img
                             src={editIcon}
@@ -191,7 +219,7 @@ function HomeScreen() {
                         </span>
 
                         {isOpen && openItemId === obj.id && (
-                          <Modal
+                          <EditModal
                             key={idx}
                             setIsOpen={setIsOpen}
                             editItemHandler={editItemHandler}

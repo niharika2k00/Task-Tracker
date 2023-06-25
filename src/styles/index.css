@@ -4,14 +4,11 @@ html {
 
 :root {
   padding: 1rem;
-  --primary: #646cff;
-  --light-green: #e3f7eb;
-  --green: #069861;
-  --green1: #14a44e;
+  --primary: #3DA2C3;
+  --green: #14a44e;
   --red: #dc4b64;
-  --yellow: #e4a11b;
 
-  #3DA2C3   #b35d82
+  /* #3DA2C3   #b35d82  #646cff */
 }
 
 .head {
@@ -35,7 +32,7 @@ html {
   margin: 1rem;
   padding: 0.4rem 1rem;
   border-radius: 6px;
-  width: 20rem;
+  width: 26rem;
   height: 2.2rem;
   border-width: 0px 0px 1px 0px; /* remove border */
 }
@@ -45,7 +42,8 @@ html {
 }
 
 #input-box:hover {
-  box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+  /* box-shadow: 0 8px 9px -4px rgba(20, 164, 77, 0.3); */
+  box-shadow: 0 8px 9px -4px rgba(20, 164, 116, 0.3);
   transform: translateY(-1px);
 }
 
@@ -63,11 +61,9 @@ li {
 
 #list {
   width: 100%;
-  /* justify-content: start; */
   font-size: 1.7rem;
-  /* align-items: center; */
   display: grid;
-  grid-template-columns: 60% 20% auto; /* for 2 column */
+  grid-template-columns: 60% 20% auto; /* for 3 column */
   /* grid-template-rows: 3.2rem; */
   /* grid-gap: 20rem; */
   margin: 0.5rem 0px;
@@ -91,5 +87,34 @@ li {
 }
 
 .not-checked-item {
-  /* padding: auto; */
+  padding: auto;
+}
+
+.labelcontent {
+  text-align: start;
+  padding-left: 1.6rem;
+  padding-top: 1rem;
+}
+
+/* common style for priority */
+.labelBox {
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 0 1.4rem;
+  padding: 0.4rem 0;
+}
+
+.low {
+  color: #069861;
+  background-color: #e3f7eb;
+}
+
+.medium {
+  color: #e4a11b;
+  background-color: #f8f1e5;
+}
+
+.high {
+  color: #dc4b64;
+  background-color: #faecec;
 }

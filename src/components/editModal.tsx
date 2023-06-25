@@ -9,9 +9,8 @@ interface Props {
   editItem: any;
 }
 
-const Modal: React.FC<Props> = (props) => {
-  var { setIsOpen, editItemHandler, id, setEditItem, editItem, ...rest } =
-    props;
+const ModalEdit: React.FC<Props> = (props) => {
+  var { setIsOpen, editItemHandler, id, setEditItem, editItem } = props;
 
   const onChangeEditItemHandler = (e: any) => {
     setEditItem({ ...editItem, text: e.target.value });
@@ -32,7 +31,7 @@ const Modal: React.FC<Props> = (props) => {
         <div className="modal">
           <h3 className="modal-heading">Edit Todo</h3>
 
-          <div className="content">
+          <div>
             <input
               name="todo"
               value={editItem.text}
@@ -67,4 +66,4 @@ const Modal: React.FC<Props> = (props) => {
   );
 };
 
-export default Modal;
+export default ModalEdit;
