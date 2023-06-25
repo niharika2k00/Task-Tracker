@@ -4,11 +4,11 @@ html {
 
 :root {
   padding: 1rem;
-  --primary: #3DA2C3;
-  --green: #14a44e;
-  --red: #dc4b64;
+  --primary: #3da2c3;
+  --success: #14a44e;
+  --warning: #dc4b64;
 
-  /* #3DA2C3   #b35d82  #646cff */
+  /* #3DA2C3    #646cff */
 }
 
 .head {
@@ -47,12 +47,30 @@ html {
   transform: translateY(-1px);
 }
 
+#buttonBar {
+  padding-top: 1.6rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .button {
   border-radius: 6px;
   height: 3.4rem;
   padding: 0.4rem 1rem;
   cursor: pointer;
   border: none;
+}
+
+.addBtn {
+  color: white;
+  background-color: var(--primary);
+}
+
+.clearallBtn {
+  /* display: flex; */
+  justify-content: space-evenly;
+  color: white;
+  background-color: var(--warning);
 }
 
 li {

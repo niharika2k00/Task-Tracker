@@ -129,7 +129,7 @@ function HomeScreen() {
   return (
     <>
       <div className="maincard">
-        <section style={{ textAlign: "center", paddingTop: "1.6rem" }}>
+        <section id="buttonBar">
           {isOpenLabel && (
             <Modal
               type="create"
@@ -144,8 +144,8 @@ function HomeScreen() {
 
           <button
             type="button"
-            className="button"
-            value="add priority"
+            className="button addBtn"
+            value="add"
             onClick={() => setIsOpenLabel(true)}
           >
             <FontAwesomeIcon icon={faPlus} /> Add Task
@@ -154,7 +154,7 @@ function HomeScreen() {
           {todoArr.length > 0 && (
             <button
               type="button"
-              className="button"
+              className="button clearallBtn"
               value="delete all"
               onClick={() => setTodoArr([])}
             >
@@ -178,7 +178,7 @@ function HomeScreen() {
                   <>
                     {/* <li key={idx}> */}
                     <div id="list" key={idx}>
-                      <div>
+                      <div style={{ paddingLeft: "1rem" }}>
                         <input
                           type="checkbox"
                           value={obj.text}

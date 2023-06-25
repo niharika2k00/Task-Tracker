@@ -39,13 +39,13 @@
 
 .saveBtn {
   color: white;
-  background: var(--green);
+  background: var(--success);
   border: none;
 }
 
 .cancelBtn {
   color: #ffffff;
-  background: var(--red);
+  background: var(--warning);
   border: none;
 }
 
