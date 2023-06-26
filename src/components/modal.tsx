@@ -15,7 +15,7 @@ interface PropsType {
   value: string;
 }
 
-const ModalEdit: React.FC<PropsType> = (props) => {
+const Modal: React.FC<PropsType> = (props) => {
   var { closeHandler, ...args } = props;
 
   const onChangeEditItemHandler = (e: any) => {
@@ -138,4 +138,4 @@ const ModalEdit: React.FC<PropsType> = (props) => {
   );
 };
 
-export default ModalEdit;
+export default Modal;
