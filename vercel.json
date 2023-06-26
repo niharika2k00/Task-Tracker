@@ -1,8 +1,12 @@
 {
-  "version": 2,
   "build": {
     "env": {
       "CI": "false"
+    },
+    "command": "npm run build",
+    "ignore": ["**/node_modules/**"],
+    "warnings": {
+      "ignore": ["Type '{ type: string;", "Type '{ type: string;"]
     }
   }
 }

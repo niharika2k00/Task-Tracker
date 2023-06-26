@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import "../styles/modal.css";
+import { TodoProps } from "./homeScreen.tsx";
 
 interface PropsType {
   type: string;
-  closeHandler: any;
-  editItemHandler(id: number, updatedText: string): void;
-  addItemHandler(): void;
-  id: number;
-  setEditItem: any;
-  editItem: { id: number; text: string; label: string; isComplete: boolean };
-  handleKeyPress(e: any): void;
-  getInput(e: any): void;
-  setLabelVal(val: string): void;
-  value: string;
+  closeHandler: React.Dispatch<React.SetStateAction<boolean>>;
+  editItemHandler?(id: number, updatedText: string): void;
+  addItemHandler?(): void;
+  id?: number;
+  key?: number;
+  setEditItem?: any;
+  editItem?: TodoProps;
+  handleKeyPress?(e: any): void;
+  getInput?(e: any): void;
+  setLabelVal?(val: string): void;
+  value?: string;
 }
 
 const Modal: React.FC<PropsType> = (props) => {
@@ -27,11 +29,10 @@ const Modal: React.FC<PropsType> = (props) => {
   const saveHandler = (type: string) => {
     switch (type) {
       case "create":
-        args.addItemHandler();
+        args.addItemHandler && args.addItemHandler();
         break;
-
       case "edit":
-        args.editItemHandler(args.id, args.editItem.text);
+        args?.editItemHandler?.(args?.id || 0, args?.editItem?.text || "");
         break;
     }
   };
@@ -81,7 +82,9 @@ const Modal: React.FC<PropsType> = (props) => {
 
               <div
                 className="labelcontent"
-                onChange={(e) => args.setLabelVal(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  args?.setLabelVal?.(e.target.value)
+                }
               >
                 {labels.map((obj, idx) => {
                   return (
@@ -104,7 +107,7 @@ const Modal: React.FC<PropsType> = (props) => {
               <div>
                 <input
                   name="todo"
-                  value={args.editItem.text}
+                  value={args?.editItem?.text}
                   type="text"
                   onChange={(e) => onChangeEditItemHandler(e)}
                   id="input-box"

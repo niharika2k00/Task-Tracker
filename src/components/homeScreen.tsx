@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import deleteIcon from "../assets/bin.png";
 import editIcon from "../assets/edit.png";
 
-interface TodoProps {
+export interface TodoProps {
   readonly id: number;
   text: string;
   label: string;
@@ -54,7 +54,7 @@ function HomeScreen() {
     setValue(e.target.value);
   };
 
-  const handleCheck = (e: any, id: number): void => {
+  const handleCheck = (id: number): void => {
     // console.log(e.target.checked);
     let modifiedArr = todoArr.map((obj) => {
       if (obj.id === id) obj.isComplete = !obj.isComplete;
@@ -182,7 +182,7 @@ function HomeScreen() {
                         <input
                           type="checkbox"
                           value={obj.text}
-                          onChange={(e) => handleCheck(e, obj.id)}
+                          onChange={() => handleCheck(obj.id)}
                           style={{ marginRight: "1rem" }}
                         />
                         <span
