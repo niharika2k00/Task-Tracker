@@ -1,6 +1,6 @@
 import HomeScreen from "./components/homeScreen.tsx";
 import "./styles/index.css";
-import todoIcon from "./assets/todo-list.png";
+import todoIcon from "./assets/todo.png";
 
 function App() {
   return (
