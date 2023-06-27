@@ -197,12 +197,11 @@ function HomeScreen() {
                       <div className={labelColor(obj.label)}> {obj.label} </div>
 
                       <div style={{ textAlign: "center" }}>
-                        <span className="editBox" onClick={onClickEditHandler}>
-                          <img
-                            src={editIcon}
-                            alt="edit"
-                            style={{ height: "1.6rem" }}
-                          />
+                        <span
+                          onClick={onClickEditHandler}
+                          className="actionBox"
+                        >
+                          <img id="iconPopOut" src={editIcon} alt="edit" />
                         </span>
 
                         {isOpen && openItemId === obj.id && (
@@ -219,13 +218,9 @@ function HomeScreen() {
 
                         <span
                           onClick={() => deleteItemHandler(obj.id)}
-                          className="deleteBox"
+                          className="actionBox"
                         >
-                          <img
-                            src={deleteIcon}
-                            alt="X"
-                            style={{ height: "1.6rem" }}
-                          />
+                          <img id="iconPopOut" src={deleteIcon} alt="X" />
                         </span>
                       </div>
                     </div>

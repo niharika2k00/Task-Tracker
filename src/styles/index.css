@@ -61,6 +61,10 @@ html {
   border: none;
 }
 
+.button:hover {
+  box-shadow: 10px 8px 10px -8px rgb(123, 113, 113);
+}
+
 .addBtn {
   color: white;
   background-color: var(--primary);
@@ -88,16 +92,21 @@ li {
   padding: 0.7rem 0px;
 }
 
-.deleteBox {
+.actionBox {
+  cursor: pointer;
   padding: 0.4rem 0.8rem;
   margin: 0.8rem 0.4rem 0.8rem 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
-.editBox {
-  padding: 0.4rem 0.8rem;
-  margin: 0.8rem 0.4rem 0.8rem 0.4rem;
-  border: 1px solid black;
+#iconPopOut {
+  height: 1.8rem;
+  transition: all 0.5s ease;
+}
+
+#iconPopOut:hover {
+  /* transform: translateX(4px); */
+  transform: scale(1.4);
 }
 
 .checked-item {
