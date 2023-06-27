@@ -83,7 +83,9 @@ const Modal: React.FC<PropsType> = (props) => {
               <div
                 className="labelcontent"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  args?.setLabelVal?.(e.target.value)
+                  args?.setLabelVal?.(
+                    e.target.value ? e.target.value : "Medium Priority"
+                  )
                 }
               >
                 {labels.map((obj, idx) => {

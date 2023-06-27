@@ -86,6 +86,7 @@ function HomeScreen() {
 
     setTodoArr([...todoArr, todoObj]);
     setValue("");
+    setLabelVal("");
     setIsOpenLabel(false);
   };
 
@@ -128,7 +129,7 @@ function HomeScreen() {
 
   return (
     <>
-      <div className="maincard">
+      <div className="maincard scrollbar">
         <section id="buttonBar">
           {isOpenLabel && (
             <Modal
